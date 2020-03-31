@@ -60,7 +60,7 @@ class SearchResultViewController: UIViewController {
     
     guard let condition = searchCondition else { return }
     
-    FlickrProvider.shared.fetchData(text: condition.name, limit: condition.limit, page: page) { [weak self] result in
+    FlickrProvider.shared.fetchData(type: Databack.self, text: condition.name, limit: condition.limit, page: page) { [weak self] result in
       
       guard let strongSelf = self else {
         

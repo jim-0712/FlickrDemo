@@ -14,7 +14,7 @@ class FlickrProvider {
   
   private init () {}
   
-  func fetchData(text: String, limit: Int, page: Int, completion: @escaping (Result<Databack, Error>) -> Void) {
+  func fetchData<T: Decodable>(type: T.Type, text: String, limit: Int, page: Int, completion: @escaping (Result<T, Error>) -> Void) {
     
     ConnectManager.shared.request(ConnectRequest.getImage(text: text, limit: limit, page: page)) { result in
       
@@ -24,7 +24,7 @@ class FlickrProvider {
         
         do {
           
-          let photoData = try JSONDecoder().decode(Databack.self, from: data)
+          let photoData = try JSONDecoder().decode(T.self, from: data)
             
             completion(Result.success(photoData))
           
