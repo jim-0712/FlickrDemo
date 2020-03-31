@@ -8,6 +8,7 @@ target 'FlickrDemo' do
   # Pods for FlickrDemo
  
  pod "IQKeyboardManager"
+ pod "Kingfisher"
 
   target 'FlickrDemoTests' do
     inherit! :search_paths
