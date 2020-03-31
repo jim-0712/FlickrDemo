@@ -30,7 +30,7 @@ class SearchResultViewController: UIViewController {
   
   var searchCondition: APIDataItem?
   
-  var photoBack: Photos? {
+  var photoBack: [Photo] = [] {
     
     didSet {
       
@@ -71,22 +71,11 @@ class SearchResultViewController: UIViewController {
         
       case .success(let dataBack):
         
-        if strongSelf.page == 1 {
+        strongSelf.page = dataBack.photos.page
+        
+        dataBack.photos.photo.forEach { photo in
           
-          strongSelf.photoBack = dataBack.photos
-          
-        } else {
-          
-          guard var photoData = strongSelf.photoBack else {
-            
-            return
-          }
-          
-          photoData.photo.forEach { photo in
-            photoData.photo.append(photo)
-          }
-           
-          strongSelf.photoBack = photoData
+          strongSelf.photoBack.append(photo)
         }
 
       case .failure(let error):
@@ -100,7 +89,7 @@ class SearchResultViewController: UIViewController {
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
-    return photoBack?.photo.count ?? 0
+    return photoBack.count
     
   }
   
@@ -111,14 +100,11 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     cell.favoriteBtn.isHidden = false
     
-    guard let dataBack = photoBack?.photo[indexPath.item] else {
-      
-      return UICollectionViewCell()
-    }
+    let dataBack = photoBack[indexPath.item]
     
     guard let url = dataBack.urlM else {
       
-      cell.setUpcellContent(label: dataBack.title, Image: nil, indexRow: indexPath.item)
+    cell.setUpcellContent(label: dataBack.title, Image: nil, indexRow: indexPath.item)
       
       return cell
     }
@@ -130,12 +116,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     
-    guard let dataBack = photoBack else {
-      
-      return
-    }
-    
-    if indexPath.item == dataBack.photo.count - 1 {
+    if indexPath.item == photoBack.count - 1 {
       page += 1
       getData()
     }
@@ -173,11 +154,6 @@ extension SearchResultViewController: FavoriteManager {
     
     var isMatch = false
     
-    guard let dataBack = photoBack else {
-      
-      return
-    }
-    
     StorageManager.shared.fetchData().forEach { favor in
       
       guard let name = favor.name else {
@@ -185,7 +161,7 @@ extension SearchResultViewController: FavoriteManager {
         return
       }
       
-      if name == dataBack.photo[index].title {
+      if name == photoBack[index].title {
         
         isMatch = true
       }
@@ -193,7 +169,7 @@ extension SearchResultViewController: FavoriteManager {
     
     if !isMatch {
      
-      let loveItem = Favorite(name: dataBack.photo[index].title, imageString: dataBack.photo[index].urlM ?? "")
+      let loveItem = Favorite(name: photoBack[index].title, imageString: photoBack[index].urlM ?? "")
       
       StorageManager.shared.saveContext(favorite: loveItem)
       
