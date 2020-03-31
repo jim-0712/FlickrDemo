@@ -12,6 +12,8 @@ class FavoritesListViewController: UIViewController {
     
   let cellId = "cellId"
   
+  let addToFavorite = "reload"
+  
   var favoriteData: [Favorites] = [] {
     
     didSet {
@@ -37,11 +39,12 @@ class FavoritesListViewController: UIViewController {
   override func viewDidLoad() {
       super.viewDidLoad()
       setUpCollection()
+      fetchData()
+      NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name:  Notification.Name(addToFavorite), object: nil)
       // Do any additional setup after loading the view.
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+
+  @objc func fetchData() {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
     

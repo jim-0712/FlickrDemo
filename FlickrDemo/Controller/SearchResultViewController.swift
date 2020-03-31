@@ -15,6 +15,8 @@ class SearchResultViewController: UIViewController {
   
   let cellId = "cellId"
   
+  let addToFavorite = "reload"
+  
   let collectioveView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let screen = UIScreen.main.bounds
@@ -196,6 +198,8 @@ extension SearchResultViewController: FavoriteManager {
       let loveItem = Favorite(name: dataBack.photo[index].title, imageString: dataBack.photo[index].urlM ?? "")
       
       delegate.saveContext(favorite: loveItem)
+      
+      NotificationCenter.default.post(name: Notification.Name(addToFavorite), object: nil)
       
     }
   }
