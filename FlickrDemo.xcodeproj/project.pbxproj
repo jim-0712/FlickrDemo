@@ -28,6 +28,7 @@
 		FB780715243254E800D7FE21 /* CustomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB780714243254E800D7FE21 /* CustomeCell.swift */; };
 		FB78071724325FC200D7FE21 /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB78071624325FC200D7FE21 /* KingFisherWrapper.swift */; };
 		FB78071D2432D41500D7FE21 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB78071C2432D41500D7FE21 /* FavoritesListViewController.swift */; };
+		FB78071F2432EDFB00D7FE21 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB78071E2432EDFB00D7FE21 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		FB780714243254E800D7FE21 /* CustomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeCell.swift; sourceTree = "<group>"; };
 		FB78071624325FC200D7FE21 /* KingFisherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		FB78071C2432D41500D7FE21 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
+		FB78071E2432EDFB00D7FE21 /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 		FB78070B2432144A00D7FE21 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FB78071E2432EDFB00D7FE21 /* StorageManager.swift */,
 				FB780705243206AA00D7FE21 /* APIDataItem.swift */,
 				FB7807092432144300D7FE21 /* APIManager.swift */,
 				FB7807102432497D00D7FE21 /* FlickrProvider.swift */,
@@ -482,6 +485,7 @@
 				FB7806D92431FC9700D7FE21 /* Favorites.xcdatamodeld in Sources */,
 				FB7807112432497D00D7FE21 /* FlickrProvider.swift in Sources */,
 				FB780706243206AA00D7FE21 /* APIDataItem.swift in Sources */,
+				FB78071F2432EDFB00D7FE21 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

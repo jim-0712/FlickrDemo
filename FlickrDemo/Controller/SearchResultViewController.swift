@@ -171,8 +171,6 @@ extension SearchResultViewController: FavoriteManager {
   
   func tapOnBtn(cell: CustomeCell, index: Int) {
     
-    let delegate = UIApplication.shared.delegate as! AppDelegate
-    
     var isMatch = false
     
     guard let dataBack = photoBack else {
@@ -180,7 +178,7 @@ extension SearchResultViewController: FavoriteManager {
       return
     }
     
-    delegate.fetchData().forEach { favor in
+    StorageManager.shared.fetchData().forEach { favor in
       
       guard let name = favor.name else {
         
@@ -197,7 +195,7 @@ extension SearchResultViewController: FavoriteManager {
      
       let loveItem = Favorite(name: dataBack.photo[index].title, imageString: dataBack.photo[index].urlM ?? "")
       
-      delegate.saveContext(favorite: loveItem)
+      StorageManager.shared.saveContext(favorite: loveItem)
       
       NotificationCenter.default.post(name: Notification.Name(addToFavorite), object: nil)
       

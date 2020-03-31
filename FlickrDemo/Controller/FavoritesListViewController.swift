@@ -45,11 +45,7 @@ class FavoritesListViewController: UIViewController {
   }
 
   @objc func fetchData() {
-    
-    let delegate = UIApplication.shared.delegate as! AppDelegate
-    
-    favoriteData = delegate.fetchData()
-    
+    favoriteData = StorageManager.shared.fetchData()    
   }
   
   func setUpCollection() {
