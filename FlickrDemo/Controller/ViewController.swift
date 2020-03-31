@@ -24,28 +24,28 @@ class ViewController: UIViewController {
   
   var canSearch = false
   
-  let contentTextField: UITextField = {
+  lazy var  contentTextField: UITextField = {
     let contentTextField = UITextField()
-    contentTextField.placeholder = "欲搜尋內容"
+    contentTextField.placeholder = Search.searchContent.rawValue
     contentTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
     contentTextField.textAlignment = .left
     contentTextField.translatesAutoresizingMaskIntoConstraints = false
     return contentTextField
   }()
   
-  let countTextField: UITextField = {
+  lazy var countTextField: UITextField = {
     let countTextField = UITextField()
     countTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
     countTextField.keyboardType = .numberPad
-    countTextField.placeholder = "每頁呈現數量"
+    countTextField.placeholder = Search.searchCount.rawValue
     countTextField.textAlignment = .left
     countTextField.translatesAutoresizingMaskIntoConstraints = false
     return countTextField
   }()
   
-  let confirmButton: UIButton = {
+  lazy var confirmButton: UIButton = {
     let confirmBtn = UIButton()
-    confirmBtn.setTitle("搜尋", for: .normal)
+    confirmBtn.setTitle(Search.search.rawValue, for: .normal)
     confirmBtn.translatesAutoresizingMaskIntoConstraints = false
     confirmBtn.addTarget(self, action: #selector(searchResult), for: .touchUpInside)
     return confirmBtn
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
   
   @objc func searchResult() {
     
-    let storyboard = UIStoryboard.init(name: "SearchResult", bundle: nil).instantiateViewController(identifier: "SearchResultViewController")
+    let storyboard = UIStoryboard.init(name: SearchResult.searchResultVC.storyBoardName, bundle: nil).instantiateViewController(identifier: SearchResult.searchResultVC.storyBoardIdentifier)
     guard let result = storyboard as? SearchResultViewController,
           let text = self.text,
           let perPage = self.perPage else {
