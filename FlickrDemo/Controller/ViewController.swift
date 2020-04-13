@@ -24,10 +24,11 @@ class ViewController: UIViewController {
   
   var canSearch = false
   
-  lazy var  contentTextField: UITextField = {
+  lazy var contentTextField: UITextField = {
     let contentTextField = UITextField()
     contentTextField.placeholder = Search.searchContent.rawValue
     contentTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+    contentTextField.clearButtonMode = .always
     contentTextField.textAlignment = .left
     contentTextField.translatesAutoresizingMaskIntoConstraints = false
     return contentTextField
@@ -37,6 +38,7 @@ class ViewController: UIViewController {
     let countTextField = UITextField()
     countTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
     countTextField.keyboardType = .numberPad
+    countTextField.clearButtonMode = .always
     countTextField.placeholder = Search.searchCount.rawValue
     countTextField.textAlignment = .left
     countTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -59,12 +61,8 @@ class ViewController: UIViewController {
         
         return
       }
-
-      if !context.isEmptyOrWhitespace() {
-
-        self.text = context
-
-      }
+      
+      self.text = context.isEmptyOrWhitespace() ? nil : context
 
     } else if sender == countTextField {
 
@@ -72,12 +70,9 @@ class ViewController: UIViewController {
         
         return
       }
+      
+      self.perPage = count.isEmptyOrWhitespace() ? nil : Int(count)
 
-      if !count.isEmptyOrWhitespace() {
-
-        self.perPage = Int(count)
-
-      }
     }
     
     guard let _ = self.text,
@@ -97,6 +92,7 @@ class ViewController: UIViewController {
   @objc func searchResult() {
     
     let storyboard = UIStoryboard.init(name: SearchResult.searchResultVC.storyBoardName, bundle: nil).instantiateViewController(identifier: SearchResult.searchResultVC.storyBoardIdentifier)
+    
     guard let result = storyboard as? SearchResultViewController,
           let text = self.text,
           let perPage = self.perPage else {

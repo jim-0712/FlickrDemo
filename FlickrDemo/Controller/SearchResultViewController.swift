@@ -54,6 +54,7 @@ class SearchResultViewController: UIViewController {
     collectioveView.delegate = self
     collectioveView.dataSource = self
     collectioveView.register(CustomeCell.self, forCellWithReuseIdentifier: cellId)
+    
   }
   
   func getData() {
@@ -94,23 +95,24 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CustomeCell else  { return UICollectionViewCell() }
-    
+
     cell.delegate = self
-    
+
     cell.favoriteBtn.isHidden = false
-    
+
     let dataBack = photoBack[indexPath.item]
-    
+
     guard let url = dataBack.urlM else {
-      
+
     cell.setUpcellContent(label: dataBack.title, Image: nil, indexRow: indexPath.item)
-      
+
       return cell
     }
-    
+
     cell.setUpcellContent(label: dataBack.title, Image: url, indexRow: indexPath.item)
-  
+
     return cell
   }
   

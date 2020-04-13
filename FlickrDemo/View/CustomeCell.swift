@@ -16,11 +16,15 @@ protocol FavoriteManager: AnyObject {
 }
 
 class CustomeCell: UICollectionViewCell {
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
+  
+  required init?(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+  }
   
   weak var delegate: FavoriteManager?
   
@@ -34,8 +38,7 @@ class CustomeCell: UICollectionViewCell {
         image.backgroundColor = UIColor.gray
         return image
     }()
-    
-    
+    	
     let textLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -101,8 +104,5 @@ class CustomeCell: UICollectionViewCell {
       ])
 
     }
-  
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 }
